@@ -12,6 +12,7 @@ jobs:
       - run: echo ${{ secrets.EXPO_CLI_PASSWORD }}
   publish:
     name: Install-and-publish
+    needs: [ ci, Check_scretes] 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -28,7 +29,6 @@ jobs:
   
   ci:
     name: Daily Continuous Integration
-    needs: publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

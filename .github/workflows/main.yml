@@ -39,5 +39,4 @@ jobs:
         with:
           expo-version: 4.x
       - run: yarn install
-      - run: yarn test
       - run: expo build:web 

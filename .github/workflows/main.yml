@@ -11,7 +11,7 @@ jobs:
       - run: echo ${{ secrets.EXPO_CLI_USERNAME }}
       - run: echo ${{ secrets.EXPO_CLI_PASSWORD }}
   publish:
-    name: Install and publish
+    name: Install-and-publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -25,8 +25,10 @@ jobs:
           expo-password: Mayur7671@
       - run: yarn install
       - run: expo publish
+  
   ci:
     name: Daily Continuous Integration
+    needs: publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

@@ -10,7 +10,7 @@ jobs:
     steps:
       - run: echo ${{ secrets.EXPO_CLI_USERNAME }}
       - run: echo ${{ secrets.EXPO_CLI_PASSWORD }}
-    publish:
+  publish:
     name: Install and publish
     runs-on: ubuntu-latest
     steps:

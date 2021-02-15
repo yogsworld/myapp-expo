@@ -10,3 +10,18 @@ jobs:
     steps:
       - run: echo ${{ secrets.EXPO_CLI_USERNAME }}
       - run: echo ${{ secrets.EXPO_CLI_PASSWORD }}
+    publish:
+    name: Install and publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - uses: expo/expo-github-action@v5
+        with:
+          expo-version: 4.x
+          expo-username: mayur1704
+          expo-password: Mayur7671@
+      - run: yarn install
+      - run: expo publish

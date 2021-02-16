@@ -39,4 +39,4 @@ jobs:
         with:
           expo-version: 4.x
       - run: yarn install
-      - run: expo build:web 
+      - run: expo build:android -t apk

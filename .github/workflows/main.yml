@@ -40,7 +40,6 @@ jobs:
         with:
           expo-version: 4.x
       - run: yarn install
-      - run: expo build:android -t apk
       - uses: 8398a7/action-slack@v3
         with:
           status: custom

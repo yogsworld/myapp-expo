@@ -10,6 +10,7 @@ jobs:
     steps:
       - run: echo ${{ secrets.EXPO_CLI_USERNAME }}
       - run: echo ${{ secrets.EXPO_CLI_PASSWORD }}
+      - run: echo Test
   publish:
     name: Install-and-publish
     needs: [ ci, Check_scretes] 

@@ -1,44 +1,31 @@
-name: Expo Publish
+name: Expo CI CD
+
 on:
-  push:
-    branches:
-      - master
+  push :
+    branches : [master]
+
 jobs:
-  Check_scretes:
-    name: username and password check
+  Build-for-android:
+    needs: [check-secrets]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - uses: expo/expo-github-action@v5
+        with:
+          expo-version: 4.x
+          expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
+          expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
+      - name: Install deps
+        run: yarn install
+      - name: Build Android APK Bundle
+        run: expo build:android
+        
+  check-secrets:
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ secrets.EXPO_CLI_USERNAME }}
       - run: echo ${{ secrets.EXPO_CLI_PASSWORD }}
       - run: echo Test
-  publish:
-    name: Install-and-publish
-    needs: [ ci, Check_scretes] 
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - uses: expo/expo-github-action@v5
-        with:
-          expo-version: 4.x
-          expo-username: mayur1704
-          expo-password: Mayur7671@
-      - run: yarn install
-      - run: expo publish
-      
-  
-  ci:
-    name: Daily Continuous Integration
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - uses: expo/expo-github-action@v5
-        with:
-          expo-version: 4.x
-      - run: yarn install
-      - run: expo build:android -t app-bundle 
